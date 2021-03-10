@@ -52,8 +52,8 @@ def create_nc_cube(root="",parameterfile='lis_input.nc',outtype="ROUTING",date_f
         ds_ = xr.open_dataset(cfullpath+'/'+cfolder+'/LIS_HIST_'+cdate.strftime("%Y%m%d")+'0000.d01.nc')
         for cvar in list(ds_.variables.keys())[3:]:
             # just surface layer, change to make ncfile_init more flexible.
-            if cvar=='SoilMoist_inst':
-                ds.variables[cvar][c,:,:] = ds_.variables[cvar]
+            if cvar=='SoilMoist_inst' or cvar=='SoilMoist_tavg' or cvar=='SoilTemp_inst' or cvar=='SoilTemp_tavg':
+                ds.variables[cvar][c,:,:] = ds_.variables[cvar][0,:,:]
             else:
                 ds.variables[cvar][c,:,:] = ds_.variables[cvar]
 
